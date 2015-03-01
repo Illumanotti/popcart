@@ -183,7 +183,7 @@ function checkBootstrap(){
 /******** Load WidgetCSS ********/
 
 function loadWidgetCss(){
-	jQuery('head').append(jQuery('<link rel="stylesheet" type="text/css" />').attr('href', 'css/widget.css'));
+	jQuery('head').append(jQuery('<link rel="stylesheet" type="text/css" />').attr('href', 'https://popcart.herokuapp.com/css/widget.css'));
 	//remember to change this css/widget.css to the absolute URL once done
 }
 
@@ -218,7 +218,7 @@ function loadCart(){
 	
 	jQuery.ajax({
 		type:"POST",
-		url:"scripts/userLoggedIn.php", //need to change this to a proper url
+		url:"https://popcart.herokuapp.com/scripts/userLoggedIn.php", //need to change this to a proper url
 		success:function(data){
 			if(data!=""){
 				var clientCart=angular.module('clientCart',['firebase']);
