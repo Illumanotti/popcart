@@ -1,0 +1,43 @@
+
+code{
+	background:#F8F8FF; 
+	border:black dashed 1px; 
+	padding:6px
+}
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+.add-cart-btn-container{
+	text-align:center;
+}
+
+.add-cart-btn{
+	height:3vw;
+	height:10vh;
+	font-size:4vh;
+	padding:1vw;
+	margin:1vh;
+}
+
+.widget-container{
+	text-align:center;
+}
+
+
+.view-cart-overlay{
+	position:fixed; 
+	top:0; 
+	left:0;
+	background:rgba(0,0,0,0.6);
+	z-index:5; 
+	width:100%; 
+	height:100%; 
+	display:none;
+}
+
+.cart-item-image{
+	height:50px;
+}
+
