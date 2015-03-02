@@ -284,9 +284,8 @@ function loadWidget(){
 		};
 		
 		$scope.addToCart=function(username){
-			
 			//change to appropriate user and need change url as well
-			jQuery.post( "scripts/addToCart.php", { buyer: "benjamin", seller: seller,productID:productID }).done(function( data ) {
+			jQuery.post( "https://popcart.herokuapp.com/scripts/addToCart.php", { buyer: "benjamin", seller: seller,productID:productID }).done(function( data ) {
 				console.log(data);
 			  });
 		};
