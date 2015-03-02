@@ -3,6 +3,9 @@
 	<script src="js/client/popcart.js"></script>
 </head>
 	<body>
-		<iframe style='height:500px; width:500px; margin:5px' frameborder="0" scrolling="no" src="cart.php?u=benjamin"></iframe>
+		<div id="popcart" ng-app="cartApp" data-s="benjamin">
+			<div id="popcartCtrl" ng-controller="WidgetCtrl">
+			</div>
+		</div>
 	</body>
 </html>
