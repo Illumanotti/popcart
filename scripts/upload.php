@@ -28,7 +28,7 @@ if ((($_FILES["fileToUpload"]["type"] == "image/gif")
     echo "0";
   } else {
     $target = "../uploads/".$username."/";
-	$imageURL="uploads/".$username."/";
+	$imageURL="https://popcart.herokuapp.com/uploads/".$username."/";
 	//create folder if user does not exist
 	if (!file_exists($target)) {
     mkdir($target, 0755, true);
