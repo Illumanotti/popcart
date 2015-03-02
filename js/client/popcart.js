@@ -214,13 +214,19 @@ function main() {
 /******** load Cart data ********/
 function loadCart(){
 	//get User that is logged in
+
+	//making a CORS request
 	
+	var url="https://popcart.herokuapp.com/scripts/userLoggedIn.php";
+	var xhr=createCORSRequest('GET',url);
+	if(!xhr){
+		alert('Your browser does not support POPcart, please use FireFox or Google Chrome');
+		return;
+	}
 	
-	jQuery.ajax({
-		type:"POST",
-		url:"https://popcart.herokuapp.com/scripts/userLoggedIn.php", //need to change this to a proper url
-		success:function(data){
-			if(data!=""){
+	xhr.onload=function(){
+		var data=xhr.responseText;
+		if(data!=""){
 				var clientCart=angular.module('clientCart',['firebase']);
 				clientCart.controller('ClientCtrl',['$scope','$firebase',function($scope,$firebase){
 					
@@ -250,12 +256,35 @@ function loadCart(){
 				console.log("No User Logged in");
 				jQuery('#checkoutBtn').hide();
 			}
-		}
-	});
+	};
 	
+	xhr.onerror=function(){
+		alert('Something went wrong with PopCart');
+	};
+	
+	xhr.send();
 	
 	
 }
+
+/******** CORS for cross domain calls ********/
+// Create the XHR object.
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
 
 
 })(); // We call our anonymous function immediately
