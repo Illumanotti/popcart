@@ -208,6 +208,17 @@ function loadWidget(){
 	var productID=0;
 	 var cartApp = angular.module('cartApp', ['firebase']);
 	 var seller=jQuery('#popcart').data('s');
+	 
+	 //load Configurations
+	 
+	 cartApp.config(function($sceDelegateProvider) {
+	  $sceDelegateProvider.resourceUrlWhitelist([
+		// Allow same origin resource loads.
+		'self',
+		// Allow loading from outer templates domain.
+		'https://popcart.herokuapp.com/templates/**'
+	  ]); 
+	});
 
     cartApp.controller('WidgetCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
@@ -368,7 +379,7 @@ function loadWidget(){
 		 return{
 			 restrict:'E',
 			 scope:false,
-			 templateUrl: 'templates/cart.html'
+			 templateUrl: 'https://popcart.herokuapp.com/templates/cart.php'
 		 };
 	 });
 	

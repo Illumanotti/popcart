@@ -1,3 +1,9 @@
+<?php
+header('Access-Control-Allow-Origin: '.'*');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+?>
+
 <div ng-style="{width:widgetOptions.widgetWidth+'px',height:widgetOptions.widgetHeight+'px'}" class="panel panel-default">
     <div class="panel-heading" style="display:{{widgetOptions.showHeader}};">Panel heading</div>
     <div class="panel-body">
