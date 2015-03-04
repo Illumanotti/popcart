@@ -226,9 +226,6 @@ function loadWidget(){
 	
         $scope.widgetHeader = "block";
 		
-		widgetRef.on('value',function(snapshot){
-			console.log(snapshot.val().showHeader);
-		});
 		
 		//get Products
         var ref = new Firebase("https://popcart.firebaseio.com/products/"+seller);

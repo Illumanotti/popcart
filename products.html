@@ -39,11 +39,15 @@
     var productApp = angular.module('productsApp', ["firebase"]);
     productApp.controller('ProductCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
-        var ref = new Firebase("https://popcart.firebaseio.com/products/benjamin");
-        $scope.products = $firebase(ref).$asArray();
-        $scope.removeItem = function(id) {
-          $scope.products.$remove(id);
-        };
+		$.post( "scripts/userLoggedIn.php", function( data ) {
+			var user=data.responseText;
+			 var ref = new Firebase("https://popcart.firebaseio.com/products/"+user);
+			$scope.products = $firebase(ref).$asArray();
+			$scope.removeItem = function(id) {
+			  $scope.products.$remove(id);
+			};
+		});
+       
 
         /*$scope.addItem=function(){
 				var latestID=$scope.products[$scope.products.length-1].ID +1 ;
