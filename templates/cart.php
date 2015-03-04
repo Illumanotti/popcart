@@ -6,10 +6,10 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
 
 $firebase = new Firebase('https://popcart.firebaseio.com', 'u6V7Q6zAxWp6vdhQSmq4pNX4MSUL7mtPwfqtYFgR');
 
-$firebase = new Firebase('https://popcart.firebaseio.com', 'u6V7Q6zAxWp6vdhQSmq4pNX4MSUL7mtPwfqtYFgR');
 $path="/accessTokens";
 $cookie_name='popCartToken';
 $username='0';
+
 if(isset($_COOKIE[$cookie_name])) {
 	$token=$_COOKIE[$cookie_name];
 	$username=json_decode($firebase->get($path.'/'.$token));
@@ -23,7 +23,7 @@ if(isset($_COOKIE[$cookie_name])) {
 
 <div ng-style="{width:widgetOptions.widgetWidth+'px',height:widgetOptions.widgetHeight+'px'}" class="panel panel-default">
 
-<input id="userID" type="hidden" value="<?php echo $username;?>"/>
+<div id="userID" style="display:none"><?php echo $username;?></div>
     <div class="panel-heading" style="display:{{widgetOptions.showHeader}};">Panel heading</div>
     <div class="panel-body">
         <div id="productCarousel" class="carousel slide" data-ride="carousel">

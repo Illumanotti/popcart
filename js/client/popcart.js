@@ -254,7 +254,7 @@ function loadWidget(){
 		console.log($scope.products);
 		//get Products end
 		
-		var data=jQuery("#userID").val();
+		var data=jQuery("#userID").html();
 		console.log("The user is"+data);
 		//may use cookie to replace this, hardcoded as tom first
 		//var data="tom";
