@@ -5,7 +5,7 @@ require 'objects/Product.php';
 $path='/products';
 $firebase = new Firebase('https://popcart.firebaseio.com', 'u6V7Q6zAxWp6vdhQSmq4pNX4MSUL7mtPwfqtYFgR');
 
-$username="benjamin";
+$username=$_POST['username'];
 $productName= $_POST['productName'];
 $price=$_POST['productPrice'];
 $desc=$_POST['productDesc'];

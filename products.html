@@ -40,8 +40,8 @@
     productApp.controller('ProductCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
 		$.post( "scripts/userLoggedIn.php", function( data ) {
-			var user=data.responseText;
-			 var ref = new Firebase("https://popcart.firebaseio.com/products/"+user);
+			$scope.user=data.responseText;
+			 var ref = new Firebase("https://popcart.firebaseio.com/products/"+$scope.user);
 			$scope.products = $firebase(ref).$asArray();
 			$scope.removeItem = function(id) {
 			  $scope.products.$remove(id);
@@ -302,6 +302,7 @@
             <input type="file" name="fileToUpload" id="fileToUpload">
             <br/>
             <br/>
+			<input type="hidden" name="username" ng-model=""/>
             <div class="form-group">
               <label for="name">Product Name</label>
               <input class="form-control" name="productName" id="name" ng-model="productName" type="text" required/>
