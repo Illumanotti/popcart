@@ -13,7 +13,6 @@ class Widget{
 		$this->colorScheme=$newColor;
 		$this->username=$newUser;
 	}
-	
 
 }
 ?>
