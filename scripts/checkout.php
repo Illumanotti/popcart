@@ -52,7 +52,6 @@ if ($result->success) {
     echo("Code: " . $result->transaction->processorResponseCode);
 } else {
     echo("Validation errors:<br/>");
-	echo $_POST["totalAmount"];
     foreach (($result->errors->deepAll()) as $error) {
         echo("- " . $error->message . "<br/>");
     }
