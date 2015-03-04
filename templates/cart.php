@@ -23,7 +23,7 @@ if(isset($_COOKIE[$cookie_name])) {
 
 <div ng-style="{width:widgetOptions.widgetWidth+'px',height:widgetOptions.widgetHeight+'px'}" class="panel panel-default">
 
-<input id="userID" type="hidden" value="<?php echo $username?>"/>
+<input id="userID" type="hidden" value="<?php echo $username;?>"/>
     <div class="panel-heading" style="display:{{widgetOptions.showHeader}};">Panel heading</div>
     <div class="panel-body">
         <div id="productCarousel" class="carousel slide" data-ride="carousel">
