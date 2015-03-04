@@ -36,9 +36,9 @@ if ($result->success) {
 	$tranID=$result->transaction->id;
 	$orderItems=json_decode($firebase->get(($cartPath."/".$buyer),"POST"));
 	$transaction=new Transaction($buyer,$seller,$tranID,$orderItems);
-	$tranArray=json_decode($firebase->get($tranPath,true));
+	$tranArray=json_decode($firebase->get($tranPath."/".$seller,true));
 	$tranArray[]=$transaction;
-	$firebase->set($tranPath,$tranArray);
+	$firebase->set($tranPath."/".$seller,$tranArray);
 	//log transaction
 	$emptyArray=[];
 	$firebase->set(($cartPath."/".$buyer),$emptyArray);
