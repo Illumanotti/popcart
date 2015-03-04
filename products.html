@@ -40,7 +40,8 @@
     productApp.controller('ProductCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
 		$.post( "scripts/userLoggedIn.php", function( data ) {
-			$scope.user=data.responseText;
+			$scope.user=data;
+			
 			 var ref = new Firebase("https://popcart.firebaseio.com/products/"+$scope.user);
 			$scope.products = $firebase(ref).$asArray();
 			$scope.removeItem = function(id) {
