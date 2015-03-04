@@ -21,7 +21,10 @@ if(isset($_SESSION[$cookie_name])) {
 	$username= '0';
 }
 ?>
-
+<script>
+var braintree = Braintree.create("MIIBCgKCAQEAtLwN7/rYvKEYbaK6RRQsCXnsJg/d3jFwsUbCkHGduIrLakwqoaKfV2QOFOp6uXWrRbCepjyzY5k3GzuHPGrlfpVVdD9KgUXA0uQegkjKZM6tn2Nll3IpJoXVvZYIvoCHUAo8RwDC6eBoGAsH26j27naH0JB0uyPLYS8cFkvZnfi+DfvS1kDCjYP6rLvoYPdfXE7RNN6VcUnGfYQ+5MFF3O56oExFU9TWt57q/rO7y+EO5MYyGn7yqSM3V+DdR2FXFqqQFzcOAgQU/fV2LY45V18+54MEW1tc/ktCm3YMGX+3PfvLuXKC7ZavVmMdyBfk/Ujy73jBi+9Pj17WNMpvoQIDAQAB");
+braintree.onSubmitEncryptForm('braintree-payment-form',ajax_submit);
+</script>
 <div ng-style="{width:widgetOptions.widgetWidth+'px',height:widgetOptions.widgetHeight+'px'}" class="panel panel-default">
 
 <div id="userID" style="display:none"><?php echo $username;?></div>
@@ -59,7 +62,7 @@ if(isset($_SESSION[$cookie_name])) {
     <div class="modal-dialog">
         <div  class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button ng-click="closeModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="myModalLabel">View Cart</h4>
@@ -143,7 +146,7 @@ if(isset($_SESSION[$cookie_name])) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="closeModal" type="button" class="btn btn-default">Close</button>
+                <button ng-click="closeModal()" id="closeModal" type="button" class="btn btn-default">Close</button>
                 <button id="checkoutBtn" type="submit" class="btn btn-primary" ng-click="moveToCheckOut()">Check Out</button>
             </div>
         </div>

@@ -208,33 +208,27 @@ function loadWidget(){
 	var productID=0;
 	 var cartApp = angular.module('cartApp', ['firebase']);
 	 var seller=jQuery('#popcart').data('s');
-	 
+	
 	 //load Configurations
 	 
 	 cartApp.config(function($sceDelegateProvider) {
 	  $sceDelegateProvider.resourceUrlWhitelist([
 		// Allow same origin resource loads.
 		'self',
-		// Allow loading from outer templates domain.
 		'https://popcart.herokuapp.com/templates/**'
 	  ]); 
 	});
 	
-		cartApp.directive('popHere',function(){
-		 return{
-			 restrict:'E',
-			 scope:false,
-			 templateUrl: 'https://popcart.herokuapp.com/templates/cart.php'
-		 };
-	 });
+
     cartApp.controller('WidgetCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
 		var widgetRef=new Firebase("https://popcart.firebaseio.com/widgets/"+seller);
 		
+		console.log(jQuery("#productCarousel").html());
 		//Load options
 		var widgetOptions=$firebase(widgetRef).$asObject();
 		widgetOptions.$bindTo($scope, "widgetOptions");
-		console.log(widgetOptions);
+		
 		
 		//load buyer seller to scope, for now all the buyer is tom
 		$scope.seller=seller;
@@ -245,21 +239,21 @@ function loadWidget(){
         $scope.widgetHeader = "block";
 		
 		$scope.showLogin=function(){
-			console.log("Show Login");
+			
 			jQuery("#loginForm").slideToggle();
 		}
 		//get Products
         var ref = new Firebase("https://popcart.firebaseio.com/products/"+seller);
         $scope.products = $firebase(ref).$asArray();
-		console.log($scope.products);
+		
 		//get Products end
 		
 		var data=jQuery("#userID").html();
-		console.log("The user is"+data);
+		
 		//may use cookie to replace this, hardcoded as tom first
 		//var data="tom";
 		$scope.buyer=data;
-		console.log($scope.buyer);
+		
 		if(data!="" && data!="0"){
 					
 					var url="https://popcart.firebaseio.com/carts/"+data;
@@ -272,7 +266,7 @@ function loadWidget(){
 					};
 					
 					$scope.moveToCheckOut=function(){
-						console.log("Moving");
+						
 						jQuery('#cartPage').hide();
 						jQuery('#checkoutBtn').hide();
 						jQuery('#checkoutPage').fadeIn();
@@ -284,19 +278,20 @@ function loadWidget(){
 						for(var i=0;i<$scope.orderItems.length;i++){
 							
 							var item=$scope.orderItems[i];
-							console.log($scope.orderItems[i].product.price);
+							
 							total+=parseFloat(item.product.price);
 						}
 						return total.toFixed(2);
 					}
 					
+					$scope.closeModal=function(){
+						jQuery('#viewCart').hide();
+					}
+					
 				  var ajax_submit = function (e) {
 					  jQuery("#spinner").show();
-						console.log(e);
 					  form = jQuery('#braintree-payment-form');
 					  e.preventDefault();
-					  console.log($scope.buyer);
-					  console.log($scope.seller);
 					  jQuery("#submitInfo").attr("disabled", "disabled");
 					  jQuery.post(form.attr('action'), form.serialize(), function (data) {
 						if(data=="1"){
@@ -320,13 +315,13 @@ function loadWidget(){
 					  });
 					}
 
-				 var braintree = Braintree.create("MIIBCgKCAQEAtLwN7/rYvKEYbaK6RRQsCXnsJg/d3jFwsUbCkHGduIrLakwqoaKfV2QOFOp6uXWrRbCepjyzY5k3GzuHPGrlfpVVdD9KgUXA0uQegkjKZM6tn2Nll3IpJoXVvZYIvoCHUAo8RwDC6eBoGAsH26j27naH0JB0uyPLYS8cFkvZnfi+DfvS1kDCjYP6rLvoYPdfXE7RNN6VcUnGfYQ+5MFF3O56oExFU9TWt57q/rO7y+EO5MYyGn7yqSM3V+DdR2FXFqqQFzcOAgQU/fV2LY45V18+54MEW1tc/ktCm3YMGX+3PfvLuXKC7ZavVmMdyBfk/Ujy73jBi+9Pj17WNMpvoQIDAQAB");
+				/* var braintree = Braintree.create("MIIBCgKCAQEAtLwN7/rYvKEYbaK6RRQsCXnsJg/d3jFwsUbCkHGduIrLakwqoaKfV2QOFOp6uXWrRbCepjyzY5k3GzuHPGrlfpVVdD9KgUXA0uQegkjKZM6tn2Nll3IpJoXVvZYIvoCHUAo8RwDC6eBoGAsH26j27naH0JB0uyPLYS8cFkvZnfi+DfvS1kDCjYP6rLvoYPdfXE7RNN6VcUnGfYQ+5MFF3O56oExFU9TWt57q/rO7y+EO5MYyGn7yqSM3V+DdR2FXFqqQFzcOAgQU/fV2LY45V18+54MEW1tc/ktCm3YMGX+3PfvLuXKC7ZavVmMdyBfk/Ujy73jBi+9Pj17WNMpvoQIDAQAB");
 				 braintree.onSubmitEncryptForm('braintree-payment-form',ajax_submit);
 				 
-		
+		*/
 				
 			}else{
-				console.log("No User Logged in");
+				
 				jQuery('#checkoutBtn').hide();
 			}
 
@@ -372,10 +367,16 @@ function loadWidget(){
 			console.log(productID);
 		}
       }
-    ]);
-	
-
-	
+    ]).directive('popHere',function(){
+		 return{
+			 restrict:'E',
+			 scope:false,
+			 templateUrl: 'https://popcart.herokuapp.com/templates/cart.php',
+			 link:function(scope,elem,attrs){
+				 console.log(scope.seller);
+			 }
+		 };
+	 });
 }
 
 
