@@ -1,5 +1,6 @@
 <?php
 require '../scripts/firebaseLib.php';
+session_start();
 header('Access-Control-Allow-Origin: '.'*');
 header('Access-Control-Max-Age: 1000');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
@@ -7,11 +8,11 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
 $firebase = new Firebase('https://popcart.firebaseio.com', 'u6V7Q6zAxWp6vdhQSmq4pNX4MSUL7mtPwfqtYFgR');
 
 $path="/accessTokens";
-$cookie_name='popCartToken';
+$cookie_name='token';
 $username='0';
 
-if(isset($_COOKIE[$cookie_name])) {
-	$token=$_COOKIE[$cookie_name];
+if(isset($_SESSION[$cookie_name])) {
+	$token=$_SESSION[$cookie_name];
 	$username=json_decode($firebase->get($path.'/'.$token));
 	if(empty($username)){
 		$username='0';

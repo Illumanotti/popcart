@@ -9,9 +9,9 @@
 
 $firebase = new Firebase('https://popcart.firebaseio.com', 'u6V7Q6zAxWp6vdhQSmq4pNX4MSUL7mtPwfqtYFgR');
 $path="/accessTokens";
-$cookie_name='popCartToken';
-if(isset($_COOKIE[$cookie_name])) {
-	$token=$_COOKIE[$cookie_name];
+
+if(isset($_SESSION['token'])) {
+	$token=$_SESSION['token'];
 	$username=json_decode($firebase->get($path.'/'.$token));
 	if(empty($username)){
 		echo '0';
@@ -20,6 +20,7 @@ if(isset($_COOKIE[$cookie_name])) {
 	}
 	
 }else{
+	
 	echo '0';
 }
 ?>
