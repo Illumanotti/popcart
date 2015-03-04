@@ -219,7 +219,14 @@ function loadWidget(){
 		'https://popcart.herokuapp.com/templates/**'
 	  ]); 
 	});
-
+	
+		cartApp.directive('popHere',function(){
+		 return{
+			 restrict:'E',
+			 scope:false,
+			 templateUrl: 'https://popcart.herokuapp.com/templates/cart.php'
+		 };
+	 });
     cartApp.controller('WidgetCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
 		var widgetRef=new Firebase("https://popcart.firebaseio.com/widgets/"+seller);
@@ -247,15 +254,8 @@ function loadWidget(){
 		console.log($scope.products);
 		//get Products end
 		
-		
-	var url="https://popcart.herokuapp.com/scripts/userLoggedIn.php";
-	var xhr=createCORSRequest('GET',url);
-	if(!xhr){
-		alert('Your browser does not support XHTML, please use FireFox or Google Chrome');
-		return;
-	}
-	xhr.onload=function(){
-		var data=xhr.responseText;
+		var data=jQuery("#userID").val();
+		console.log("The user is"+data);
 		//may use cookie to replace this, hardcoded as tom first
 		//var data="tom";
 		$scope.buyer=data;
@@ -329,8 +329,7 @@ function loadWidget(){
 				console.log("No User Logged in");
 				jQuery('#checkoutBtn').hide();
 			}
-	}
-	xhr.send();
+
 		$scope.viewCart=function(){
 				jQuery('#viewCart').show();
 		};
@@ -375,13 +374,7 @@ function loadWidget(){
       }
     ]);
 	
-	cartApp.directive('popHere',function(){
-		 return{
-			 restrict:'E',
-			 scope:false,
-			 templateUrl: 'https://popcart.herokuapp.com/templates/cart.php'
-		 };
-	 });
+
 	
 }
 
