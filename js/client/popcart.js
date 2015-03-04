@@ -248,14 +248,13 @@ function loadWidget(){
 		
 		//get Products end
 		
-		var data=jQuery("#userID").html();
+		var data="Law";
 		
 		//may use cookie to replace this, hardcoded as tom first
 		//var data="tom";
 		$scope.buyer=data;
 		
 		if(data!="" && data!="0"){
-					
 					var url="https://popcart.firebaseio.com/carts/"+data;
 					
 					var cartRef=new Firebase(url);
@@ -288,32 +287,7 @@ function loadWidget(){
 						jQuery('#viewCart').hide();
 					}
 					
-				  var ajax_submit = function (e) {
-					  jQuery("#spinner").show();
-					  form = jQuery('#braintree-payment-form');
-					  e.preventDefault();
-					  jQuery("#submitInfo").attr("disabled", "disabled");
-					  jQuery.post(form.attr('action'), form.serialize(), function (data) {
-						if(data=="1"){
-							jQuery("#submitInfo").removeAttr("disabled");
-							jQuery("#checkoutPage").hide();
-							jQuery("#endPage").fadeIn();
-							jQuery("#spinner").hide();
-						}else{
-							//display error
-							jQuery("#errorMsg").show();
-							jQuery("#errorMsg").empty();
-							jQuery("#errorMsg").append(data);
-							setTimeout(function(){ 
-							jQuery("#errorMsg").empty();
-							jQuery("#errorMsg").fadeOut();
-							jQuery("#submitInfo").removeAttr("disabled");
-							}, 10000);
-							jQuery("#spinner").hide();
-						}
-						
-					  });
-					}
+				
 
 				/* var braintree = Braintree.create("MIIBCgKCAQEAtLwN7/rYvKEYbaK6RRQsCXnsJg/d3jFwsUbCkHGduIrLakwqoaKfV2QOFOp6uXWrRbCepjyzY5k3GzuHPGrlfpVVdD9KgUXA0uQegkjKZM6tn2Nll3IpJoXVvZYIvoCHUAo8RwDC6eBoGAsH26j27naH0JB0uyPLYS8cFkvZnfi+DfvS1kDCjYP6rLvoYPdfXE7RNN6VcUnGfYQ+5MFF3O56oExFU9TWt57q/rO7y+EO5MYyGn7yqSM3V+DdR2FXFqqQFzcOAgQU/fV2LY45V18+54MEW1tc/ktCm3YMGX+3PfvLuXKC7ZavVmMdyBfk/Ujy73jBi+9Pj17WNMpvoQIDAQAB");
 				 braintree.onSubmitEncryptForm('braintree-payment-form',ajax_submit);
