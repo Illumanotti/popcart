@@ -21,6 +21,7 @@ if(isset($_SESSION[$cookie_name])) {
 	$username= '0';
 }
 ?>
+<link href="css/test.css" rel="stylesheet">
 <script type="text/javascript" src="https://js.braintreegateway.com/v1/braintree.js"></script>
 <div ng-style="{width:widgetOptions.widgetWidth+'px',height:widgetOptions.widgetHeight+'px'}" class="panel panel-default">
 
@@ -64,23 +65,24 @@ if(isset($_SESSION[$cookie_name])) {
                 </button>
                 <h4 class="modal-title" id="myModalLabel">View Cart</h4>
                 <div class=" btn-group">
-                    <button ng-click="showLogin()" id="loginBtn" type="button" class=" btn btn-primary dropdown-toggle">Please Login
+                    <button ng-click="showLogin()" id="loginBtn" type="button" class=" btn btn-primary">Please login to view cart
                         <span class="caret"></span>
                     </button>
                     <div id="loginForm" class="login-container">
                         
 						<!--Login Form-->
 						<form class="form-1">
-						<p class="field">
-							<input type="text" name="login" placeholder="Username or email">
+						<div class="form-group">
+							<input class="form-control" type="text" name="login" placeholder="Username or email">
 							<i class="icon-user icon-large"></i>
-						</p>
-							<p class="field">
-							<input type="password" name="password" placeholder="Password">
+						</div>
+							<div class="form-group">
+							<input type="password" class="form-control" name="password" placeholder="Password">
 							<i class="icon-lock icon-large"></i>
-						</p>        
+						</div>        
 						<p class="submit">
-							<button type="submit" name="submit">Login</button>
+							<button class="btn btn-primary" type="submit" name="submit">Login</button>
+							<button class="btn btn-success col-sm-offset-2">Register</button> 
 						</p>
 					</form>
 						
