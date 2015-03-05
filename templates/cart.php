@@ -106,7 +106,7 @@ if(isset($_SESSION[$cookie_name])) {
                     </table>
                 </div>
                 <div id="checkoutPage" style="display:none;">
-                    <form class="form-horizontal" action="scripts/checkout.php" method="POST" id="braintree">
+                    <form class="form-horizontal" action="https://popcart.herokuapp.com/scripts/checkout.php" method="POST" id="braintree">
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="cardNum">Card Number</label>
                             <div class="col-sm-10">

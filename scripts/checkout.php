@@ -3,6 +3,11 @@ require_once 'braintree/lib/Braintree.php';
 require 'firebaseLib.php';
 require 'objects/Transaction.php';
 
+header('Access-Control-Allow-Origin: '.'*');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
 //Braintree configuration 
 Braintree_Configuration::environment('sandbox');
 Braintree_Configuration::merchantId('nrqrmbjbsxdypmg2');
