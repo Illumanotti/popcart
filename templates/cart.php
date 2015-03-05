@@ -67,8 +67,25 @@ if(isset($_SESSION[$cookie_name])) {
                     <button ng-click="showLogin()" id="loginBtn" type="button" class=" btn btn-primary dropdown-toggle">Please Login
                         <span class="caret"></span>
                     </button>
-                    <ul id="loginForm" class="dropdown-menu">
-                        <li>Hello</li>
+                    <ul id="loginForm" class="dropdown-menu login-container">
+                        <li>
+						<!--Login Form-->
+						<form class="form-1">
+						<p class="field">
+							<input type="text" name="login" placeholder="Username or email">
+							<i class="icon-user icon-large"></i>
+						</p>
+							<p class="field">
+							<input type="password" name="password" placeholder="Password">
+							<i class="icon-lock icon-large"></i>
+						</p>        
+						<p class="submit">
+							<button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
+						</p>
+					</form>
+						
+						<!--Login Form End-->
+						</li>
                     </ul>
                 </div>
             </div>
