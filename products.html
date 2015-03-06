@@ -47,6 +47,12 @@
     }
     return "";
 }
+
+function deleteCookie(){
+	document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+}
+
+
     var productApp = angular.module('productsApp', ["firebase"]);
     productApp.controller('ProductCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
@@ -58,7 +64,10 @@
 			  $scope.products.$remove(id);
 			};
 	
-       
+       		$scope.logout=function(){
+			deleteCookie();
+			window.replace("index.php");
+		};
 
         /*$scope.addItem=function(){
 				var latestID=$scope.products[$scope.products.length-1].ID +1 ;
@@ -193,7 +202,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+              <a href="#" ng-click="logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
             </li>
           </ul>
         </li>

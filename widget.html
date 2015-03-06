@@ -42,11 +42,16 @@
     }
     return "";
 }
+
+function deleteCookie(){
+	document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+}
     var widgetApp = angular.module('widgetApp', ['firebase']);
     widgetApp.controller('WidgetCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
 		
 			$scope.user=getCookie('username');
+			console.log($scope.user);
 			var widgetRef=new Firebase("https://popcart.firebaseio.com/widgets/"+$scope.user);
 			$scope.widgetURL='cart.php?u='+$scope.user;
 			//Load options
@@ -62,7 +67,10 @@
 			$scope.widgetHeight=snapshot.val().widgetHeight;
 			$scope.widgetWidth=snapshot.val().widgetWidth;
 		});*/
-		
+		$scope.logout=function(){
+			deleteCookie();
+			window.replace("index.php");
+		};
 		$scope.hideCode=function(){
 			$("#code-snippet").slideToggle();
 		};
@@ -197,7 +205,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+              <a href="#" ng-click="logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
             </li>
           </ul>
         </li>
