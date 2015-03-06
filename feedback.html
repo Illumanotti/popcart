@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="feedbackApp">
 
 <head>
 
@@ -9,16 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>POP-Cart</title>
+    <title>POP-Cart Admin</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -30,35 +27,24 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-	<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-59574467-2', 'auto');
-  ga('send', 'pageview');
-</script>
-
-
 </head>
 
-<body>
+<body ng-controller="feedbackCtrl">
 
     <div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">POP-Cart Admin</a>
-            </div>
+          <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="home.php">POP-Cart Admin</a>
+      </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
@@ -71,7 +57,8 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong></strong>
+                                        <h5 class="media-heading">
+                                            <strong></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -86,7 +73,8 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong></strong>
+                                        <h5 class="media-heading">
+                                            <strong></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -101,7 +89,8 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong></strong>
+                                        <h5 class="media-heading">
+                                            <strong></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -161,23 +150,22 @@
                 </li>
             </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="home.php"><i class="fa fa-fw fa-dashboard"></i> Home</a>
-                    </li>
-					
-					 <li>
-                        <a  href="products.html"><i class="fa fa-fw fa-shopping-cart"></i> Products</a>
-                    </li>
-					<li>
-                        <a href="widget.html"><i class="fa fa-fw fa-gears"></i>Widget Management</a>
-                    </li>
-							  <li>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+          <li>
+            <a href="home.php"><i class="fa fa-fw fa-dashboard"></i> Home</a>
+          </li>
+          <li>
+            <a href="products.html"><i class="fa fa-fw fa-shopping-cart"></i> Products</a>
+          </li>
+          <li>
+            <a href="widget.html"><i class="fa fa-fw fa-gears"></i>Widget Management</a>
+          </li>
+		  <li>
             <a href="feedback.html"><i class="fa fa-fw fa-gears"></i>Feedback</a>
           </li>
-                </ul>
-            </div>
+        </ul>
+      </div>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -189,54 +177,68 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Getting Started: <small>COPY.PASTE.SELL</small>
+                           Feedback
+                            
                         </h1>
                         <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="home.php">Home</a>
+                            </li>
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Getting Started
+                                <i class="fa fa-file"></i> Feedback
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
-
-                <div class="row">
-                   <div class="col-lg-4">
-				  
-				   <div class="panel panel-danger">
-				  <!-- Default panel contents -->
-				  <div class="panel-heading"> <h4>Step 1 : Add Products</h4></div>
-				  <div class="panel-body">
-					<p>Start adding products by clicking on <a href="products.html" target="_blank">Products</a> at the panel on the left</p>
-				  </div>
-				   </div>
-				   </div>
-				   <div class="col-lg-4">
-				    <div class="panel panel-info">
-				  <!-- Default panel contents -->
-				  <div class="panel-heading"> <h4>Step 2 : Copy Code Snippet</h4></div>
-				  <div class="panel-body">
-					<p>Head over to <a href='widget.html' target="_blank">Widget Management</a> and copy the code snippet given</p>
-				  </div>
-				   </div>
-				   </div>
-				   <div class="col-lg-4">
-				   <div class="panel panel-success">
-				  <!-- Default panel contents -->
-				  <div class="panel-heading"> <h4>Step 3 : Paste in any HTML file </h4></div>
-				  <div class="panel-body">
-					<p>Paste the snippet in any HTML file. Don't have one yet? Try this <a href="http://www.w3schools.com/html/tryit.asp?filename=tryhtml_default">HTML editor</a> and paste the snippet on the left panel and click "See Result"</p>
-				  </div>
-				   </div>
-				   </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    
-                </div>
-                <!-- /.row -->
-
+					<div class="row">
+					<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-12">
+						
+							  <div class="alert alert-success" >
+									Please describe any difficulties you have found when configuring your POP-cart so that we can better serve you. Your feedback is greatly appreciated to help us improve and get better at serving you! Meanwhile, please look at another awesome application by one of our peers <a href="#">here</a>
+							  </div>
+							
+						</div>
+					</div>
+					<form>
+					<div class="row">
+						<div class="col-lg-4">
+								Comments on Home page
+								<textarea id="homeFb" class="form-control" rows="3"></textarea>
+								</div>
+								<div class="col-lg-4">
+								Comments on Product Management
+								<textarea id="productFb" class="form-control" rows="3"></textarea>
+								</div>
+								<div class="col-lg-4">
+								Comments on Widget Management
+								<textarea id="widgetFb" class="form-control" rows="3"></textarea>
+								</div>
+						</div><br/>
+						<div class="row">
+						<div class="col-lg-12">
+						<button class="btn btn-success" ng-click="addFeedback()">Submit Feedback</button>
+						</div>
+						</div>
+						</form>
+						</div>
+					</div><br/>
+					
+					<div class="row">
+					<div class="col-lg-12">
+						<table class="table table-bordered">
+						  <tr><th>User</th><th>Home Page</th><th>Product Management</th><th>Widget Management</th></tr>
+						  <tr ng-repeat="fb in feedbackList" >
+						  <td>{{fb.user}}</td>
+						  <td>{{fb.homeFb}}</td>
+						  <td>{{fb.productFb}}</td>
+						  <td>{{fb.widgetFb}}</td>
+						  </tr>
+						</table>
+						</div>
+					</div>
             </div>
             <!-- /.container-fluid -->
 
@@ -248,14 +250,40 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+	<script src="js/lib/angular.min.js"></script>
+  <script src='js/lib/firebase.js'></script>
+  <script src='js/lib/angularfire.min.js'></script>
+  
+  <script>
+      function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+	var fbApp=angular.module('feedbackApp',['firebase']);
+	fbApp.controller('feedbackCtrl',['$scope','$firebase',function($scope,$firebase){
+		var ref=new Firebase("https://popcart.firebaseio.com/feedback");
+		$scope.feedbackList=$firebase(ref).$asArray();
+		
+		$scope.addFeedback=function(){
+			var user=getCookie('username');
+			//get feedback values
+			//construct json object
+			var item={user:user,homeFb:$("#homeFb").val(),productFb:$("#productFb").val(),widgetFb:$("#widgetFb").val()};
+			$scope.feedbackList.$add(item);
+			
+		}
+		
+	}])
+  </script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
 
 </body>
 
