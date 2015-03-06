@@ -151,8 +151,8 @@
 				 <img class="spinner-logo" src="img/loading.gif"/>
 				 </span>
                 </div>
-				<div class="col-sm-5">
-				  <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#registerModal">Register</button>
+				 <div class="col-sm-5">
+				  <a href="#" class="btn btn-success" data-toggle="modal" data-target="#registerModal">Register</a>
 				  </div>
               </div>
             </form>

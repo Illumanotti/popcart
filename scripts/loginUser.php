@@ -1,8 +1,22 @@
 <?php
 require 'firebaseLib.php';
 session_start();
-$username=$_POST['loginUser'];
-$password=$_POST['loginPw'];
+
+	header('Access-Control-Allow-Origin: '.'*');
+    header('Access-Control-Allow-Methods: POST,GET, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+	
+$username="";
+$password="";
+if(isset($_POST['loginUser'])){
+	$username=$_POST['loginUser'];
+}
+
+if(isset($_POST['loginPw'])){
+	$username=$_POST['loginPw'];
+}
+
 $firebase = new Firebase('https://popcart.firebaseio.com', 'u6V7Q6zAxWp6vdhQSmq4pNX4MSUL7mtPwfqtYFgR');
 
 $usersPath='/users';

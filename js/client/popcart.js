@@ -177,6 +177,24 @@
 		jQuery('head').append(jQuery('<link rel="stylesheet" type="text/css" />').attr('href', 'https://popcart.herokuapp.com/css/widget.css'));
 		//remember to change this css/widget.css to the absolute URL once done
 	}
+	
+	function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
 
 	/******** Our main function ********/
 	function main() {
@@ -231,14 +249,14 @@
 
 			//load buyer seller to scope, for now all the buyer is tom
 			$scope.seller = seller;
-
+			$scope.buyer=getCookie("username");
 
 			//Load Options end
 
 			$scope.widgetHeader = "block";
 
 			$scope.showLogin = function() {
-				jQuery("#loginForm").slideToggle();
+				jQuery("#loginContainer").slideToggle();
 			}
 
 			//get Products
@@ -246,57 +264,79 @@
 			$scope.products = $firebase(ref).$asArray();
 
 			//get Products end
-
-			var data = "Law";
-
 			//may use cookie to replace this, hardcoded as tom first
 			//var data="tom";
-			$scope.buyer = data;
-
-			if (data != "" && data != "0") {
-				var url = "https://popcart.firebaseio.com/carts/" + data;
-
+			
+			$scope.$watch("buyer",function(newVal,oldVal){
+				if (newVal != "" && newVal != "0") {
+				var url = "https://popcart.firebaseio.com/carts/" + newVal;
 				var cartRef = new Firebase(url);
 				$scope.orderItems = $firebase(cartRef).$asArray();
-
-				$scope.removeItem = function(id) {
-					$scope.orderItems.$remove(id);
+				
+			} else {
+				jQuery('#checkoutBtn').hide();
+			}
+				
+			});
+			
+			
+			
+			$scope.removeItem = function(id) {
+					if(typeof $scope.orderItems !='undefined'){
+						$scope.orderItems.$remove(id);
+					}
+					
 				};
 
-				$scope.moveToCheckOut = function() {
+				$scope.calculateTotal = function() {
+					var total = 0;
+					if(typeof $scope.orderItems !='undefined'){
+						for (var i = 0; i < $scope.orderItems.length; i++) {
+
+							var item = $scope.orderItems[i];
+
+							total += parseFloat(item.product.price);
+						}
+					}
+					return total.toFixed(2);
+				};
+			
+			
+			$scope.loginUser=function(){
+				var username=jQuery("#username").val();
+				var password=jQuery("#password").val();
+				console.log("In Login");
+				jQuery.post("https://popcart.herokuapp.com/scripts/loginUser.php",
+				{loginUser:username,loginPw:password},
+				function(response){
+					if(response=='1'){
+						setCookie('username',username,1);
+						$scope.buyer=username;
+					}else{
+						jQuery("errorLogin").show();
+						jQuery("errorLogin").empty();
+						jQuery("errorLogin").append(response);
+						setTimeout(function(){jQuery("errorLogin").hide();},3000);
+					}
+				});
+			}
+			
+			$scope.moveToCheckOut = function() {
 
 					jQuery('#cartPage').hide();
 					jQuery('#checkoutBtn').hide();
 					jQuery('#checkoutPage').fadeIn();
-				};
+			};
 
-
-				$scope.calculateTotal = function() {
-					var total = 0;
-					for (var i = 0; i < $scope.orderItems.length; i++) {
-
-						var item = $scope.orderItems[i];
-
-						total += parseFloat(item.product.price);
-					}
-					return total.toFixed(2);
-				}
-
-				$scope.closeModal = function() {
+			$scope.closeModal = function() {
 				jQuery('#cartPage').show();
 				jQuery('#checkoutBtn').show();
 				jQuery('#checkoutPage').hide();
 				jQuery("#viewCart").hide();
 				jQuery('#endPage').hide();
-				}
-
-
-
-			} else {
-
-				jQuery('#checkoutBtn').hide();
 			}
-
+			
+			
 			$scope.viewCart = function() {
 				jQuery('#viewCart').show();
 			};
@@ -386,8 +426,6 @@
 					});
 				}
 				braintree.onSubmitEncryptForm('braintree', ajax_submit);
-			
-		 
 					 }
 				 }
 				}
