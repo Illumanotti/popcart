@@ -49,7 +49,6 @@ function deleteCookie(){
     var widgetApp = angular.module('widgetApp', ['firebase']);
     widgetApp.controller('WidgetCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
-		
 			$scope.user=getCookie('username');
 			console.log($scope.user);
 			var widgetRef=new Firebase("https://popcart.firebaseio.com/widgets/"+$scope.user);
@@ -69,7 +68,7 @@ function deleteCookie(){
 		});*/
 		$scope.logout=function(){
 			deleteCookie();
-			window.replace("index.php");
+			window.location.replace("index.php");
 		};
 		$scope.hideCode=function(){
 			$("#code-snippet").slideToggle();

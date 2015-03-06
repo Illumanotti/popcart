@@ -1,4 +1,11 @@
 $(function(){
+	function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
 	$('#registerForm').ajaxForm({
 		beforeSend:function(){
 			$(".progress").show();
@@ -48,7 +55,7 @@ $(function(){
 		},
 		complete:function(response){
 			if(response.responseText=="1"){
-				document.cookie="username="+$("#registerName").val();
+				setCookie('username',$("#username").val(),1);
 				window.location.replace('home.php');
 			}else{
 				$("#errorLogin").show();
