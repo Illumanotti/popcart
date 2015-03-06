@@ -415,7 +415,7 @@ function deleteCookie(){
 			return {
 				restrict: 'E',
 				scope: false,
-				templateUrl: 'https://popcart.herokuapp.com//templates/cart.php',
+				templateUrl: 'https://popcart.herokuapp.com/templates/cart.php',
 				link: function(scope, elem, attrs) {
 					console.log(scope.seller);
 				},
