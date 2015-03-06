@@ -30,6 +30,16 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59574467-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </head>
 
 <body>
@@ -211,7 +221,7 @@
 				  <!-- Default panel contents -->
 				  <div class="panel-heading"> <h4>Step 3 : Paste in any HTML file </h4></div>
 				  <div class="panel-body">
-					<p>Copy and paste this in any HTML file. Don't have one yet? Try this <a href="http://www.w3schools.com/html/tryit.asp?filename=tryhtml_default">HTML editor</a> and paste the snippet on the left panel and click "See Result"</p>
+					<p>Paste the snippet in any HTML file. Don't have one yet? Try this <a href="http://www.w3schools.com/html/tryit.asp?filename=tryhtml_default">HTML editor</a> and paste the snippet on the left panel and click "See Result"</p>
 				  </div>
 				   </div>
 				   </div>
