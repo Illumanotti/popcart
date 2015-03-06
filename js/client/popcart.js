@@ -1,4 +1,4 @@
-(function() {
+$(document).ready(function() {
 
 	// Localize jQuery variable
 	var jQuery;
