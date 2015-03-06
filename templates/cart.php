@@ -65,24 +65,28 @@ if(isset($_SESSION[$cookie_name])) {
                 </button>
                 <h4 class="modal-title" id="myModalLabel">View Cart</h4>
                 <div class=" btn-group">
-                    <button ng-click="showLogin()" id="loginBtn" type="button" class=" btn btn-primary">Please login to view cart
+                    <button ng-click="showLogin()" id="loginBtn" type="button" class=" btn btn-primary"><span id="username-container">Please login to view cart</span>
                         <span class="caret"></span>
                     </button>
+					&nbsp
+					<button id="logoutBtn" ng-click="logOut()"style="display:none;" class="col-sm-offset-2 btn btn-danger">
+					Logout
+					</button>
                     <div id="loginContainer" class="login-container">
                         
 						<!--Login Form-->
 						<form class="form-1"
 						enctype="multipart/form-data" method="post" id="loginForm">
 						<div class="form-group">
-							<input class="form-control" type="text" id="username" placeholder="Username or email">
-							<i class="icon-user icon-large"></i>
+							<input class="form-control" type="text" id="username" placeholder="Username or email" required>
+							<i class="icon-user icon-large" ></i>
 						</div>
 							<div class="form-group">
-							<input type="password" class="form-control" id="password" placeholder="Password">
+							<input type="password" class="form-control" id="password" placeholder="Password" required>
 							<i class="icon-lock icon-large"></i>
 						</div>        
-						<p class="submit">
-							<div id="errorLogin" class="alert alert-danger" style="display:none"role="alert"></div>
+						<p  class="submit">
+							<div id="errorLogin" class="alert alert-danger" style="display:none" role="alert"></div>
 							<button ng-click="loginUser()" class="btn btn-primary" type="submit" name="submit">Login</button>
 							<button class="btn btn-success col-sm-offset-2">Register</button> 
 						</p>

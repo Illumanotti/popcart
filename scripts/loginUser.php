@@ -14,7 +14,7 @@ if(isset($_POST['loginUser'])){
 }
 
 if(isset($_POST['loginPw'])){
-	$username=$_POST['loginPw'];
+	$password=$_POST['loginPw'];
 }
 
 $firebase = new Firebase('https://popcart.firebaseio.com', 'u6V7Q6zAxWp6vdhQSmq4pNX4MSUL7mtPwfqtYFgR');
@@ -23,7 +23,8 @@ $usersPath='/users';
 
 $user=json_decode($firebase->get($usersPath."/".$username),true);
 
-if(!empty($user)){
+
+if(!empty($user) && $user!=null && !array_key_exists('error',$user)){
 	if($user['password']==hash('md5',$password)){
 		$token=hash('md5',time());
 		//setCookie("popCartToken",$token,time() + (86400 * 30), "/");

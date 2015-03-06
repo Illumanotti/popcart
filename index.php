@@ -13,7 +13,8 @@
   <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.form.js"></script>
   <script src="js/register.js"></script>
-
+ <script src="js/lib/ngFacebook.js"></script>
+ 
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/sb-admin.css" rel="stylesheet">
   <link href="css/login-form.css" rel="stylesheet">
@@ -22,8 +23,22 @@
   <title>POP-Cart Login</title>
   
   <script>
-  	var loginApp =angular.module('loginApp',['firebase']);
-	loginApp.controller('LoginCtrl',['$scope','$firebase',function($scope,$firebase){
+  	var loginApp =angular.module('loginApp',['firebase','ngFacebook']);
+	loginApp.config( function( $facebookProvider ) {
+  $facebookProvider.setAppId('906593039384747');
+}).run( function( $rootScope ) {
+  // Load the facebook SDK asynchronously
+  (function(){
+     if (document.getElementById('facebook-jssdk')) {return;}
+     var firstScriptElement = document.getElementsByTagName('script')[0];
+     var facebookJS = document.createElement('script'); 
+     facebookJS.id = 'facebook-jssdk';
+
+     facebookJS.src = '//connect.facebook.net/en_US/all.js';
+     firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
+   }());
+});
+	loginApp.controller('LoginCtrl',['$scope','$firebase','$facebook',function($scope,$firebase,$facebook){
 		$(".progress").hide();
 		var displayError=function(errorMsg){
 			$("#errorMsgBox").show();
@@ -32,89 +47,49 @@
 			setTimeout(function(){ 
 				$("#errorMsgBox").hide();
 			}, 1000);
-		}
-		
-		
-	}]);
+		};
+	$scope.isLoggedIn = false;
+	$scope.loginWithFB = function() {
+    $facebook.login().then(function() {
+      refresh();
+    });
+  }
+  function refresh() {
+    $facebook.api("/me").then( 
+      function(response) {
+        console.log(response);
+        $scope.isLoggedIn = true;
+		var username=response.id;
+		$('.spinner-logo').fadeIn();
+		var ref=new Firebase("https://popcart.firebaseio.com/users/"+username);
+		var userObj=$firebase(ref).$asObject();
+		userObj.$loaded(function(){
+			var dataExists = userObj.$value !== null;
+			if(!dataExists){
+			$.post("scripts/createUser.php",{userName:username,password:response.id,confirm:response.id,alias:response.name}, function( data ) {
+			if(data=="1"){
+				document.cookie="username="+username;
+				window.location.replace('home.php');
+			}
+		});
+			}else{
+				document.cookie="username="+username;
+				window.location.replace('home.php');
+			}
+		});
+	
+      },
+      function(err) {
+        $console.log("Please log in");
+      });
+  }
+}]);
   </script>
 
 </head>
 
 <body ng-controller="LoginCtrl">
 
-<!--Facebook stuff-->
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '906593039384747',
-      xfbml      : true,
-      version    : 'v2.2'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-<script>
-
-
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-      console.log(response.authResponse.accessToken);
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    FB.api('/me', function(response) {
-      console.log(response);
-	  userObj=response;
-      console.log('Successful login for: ' + response.name);
-    });
-  }
-</script>
-
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=653262148136076&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<!--Facebook stuff end-->
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
@@ -137,12 +112,6 @@
                   <input type="password" class="form-control" name="loginPw" id="loginPassword" placeholder="Password" required>
                 </div>
               </div>
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-				</fb:login-button>
-                </div>
-              </div>
 			  
 			<div id="errorLogin" class="alert alert-danger" style="display:none"role="alert"></div>
               <div class="form-group">
@@ -155,6 +124,7 @@
 				  <a href="#" class="btn btn-success" data-toggle="modal" data-target="#registerModal">Register</a>
 				  </div>
               </div>
+			  <div class="col-sm-offset-2"><a href="" ng-click="loginWithFB()">Login with Facebook</a></div>
             </form>
           </div>
         </div>

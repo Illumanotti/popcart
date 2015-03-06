@@ -1,8 +1,30 @@
 
-code{
-	background:#F8F8FF; 
-	border:black dashed 1px; 
-	padding:6px
+pre {
+    font-family: "Courier 10 Pitch", Courier, monospace;
+    font-size: 95%;
+    line-height: 140%;
+    white-space: pre;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+}       
+
+code {
+    font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+    font-size: 95%;
+    line-height: 140%;
+    white-space: pre;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+    background: #FFF;
+	color:#000;
+}
+
+#code-snippet code {
+    display: block;
+    padding: 0.5em 1em;
+    border: 1px solid #bebab0;
 }
 
 .carousel-inner > .item > img {
@@ -69,5 +91,7 @@ background-image: linear-gradient(to bottom, #FFFFFF 0%, #E3E3E3 300%);
 	display:none;
 	border-color:#E3E3E3;
 }
+
+
 
 

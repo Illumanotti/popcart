@@ -196,6 +196,10 @@ function getCookie(cname) {
     return "";
 }
 
+function deleteCookie(){
+	document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+}
+
 	/******** Our main function ********/
 	function main() {
 		jQuery(document).ready(function($) {
@@ -250,7 +254,8 @@ function getCookie(cname) {
 			//load buyer seller to scope, for now all the buyer is tom
 			$scope.seller = seller;
 			$scope.buyer=getCookie("username");
-
+			
+			
 			//Load Options end
 
 			$scope.widgetHeader = "block";
@@ -267,18 +272,16 @@ function getCookie(cname) {
 			//may use cookie to replace this, hardcoded as tom first
 			//var data="tom";
 			
-			$scope.$watch("buyer",function(newVal,oldVal){
-				if (newVal != "" && newVal != "0") {
-				var url = "https://popcart.firebaseio.com/carts/" + newVal;
-				var cartRef = new Firebase(url);
-				$scope.orderItems = $firebase(cartRef).$asArray();
-				
-			} else {
+
+			
+			$scope.logOut=function(){
+				deleteCookie();
+				jQuery("#username-container").empty();
+				jQuery("#username-container").append("Please login to view cart");
+				jQuery("#logoutBtn").hide();
+				$scope.buyer="";
 				jQuery('#checkoutBtn').hide();
 			}
-				
-			});
-			
 			
 			
 			$scope.removeItem = function(id) {
@@ -303,23 +306,49 @@ function getCookie(cname) {
 			
 			
 			$scope.loginUser=function(){
-				var username=jQuery("#username").val();
+				
+				jQuery("#spinnerContainer").show();
+				var loginname=jQuery("#username").val();
 				var password=jQuery("#password").val();
-				console.log("In Login");
-				jQuery.post("https://popcart.herokuapp.com/scripts/loginUser.php",
-				{loginUser:username,loginPw:password},
+				
+				if(loginname!="" && password!=""){
+				jQuery.post("https://popcart.herokuapp.com//scripts/loginUser.php",
+				{loginUser:loginname,loginPw:password},
 				function(response){
 					if(response=='1'){
-						setCookie('username',username,1);
-						$scope.buyer=username;
+						jQuery("#username-container").empty();
+						jQuery("#username-container").append(loginname);
+						jQuery("#logoutBtn").show();
+						setCookie('username',loginname,1);
+						$scope.buyer=loginname;
+						console.log("username:"+$scope.buyer);
+						$scope.$apply();
+						$scope.showLogin();
+						jQuery('#checkoutBtn').show();
 					}else{
-						jQuery("errorLogin").show();
-						jQuery("errorLogin").empty();
-						jQuery("errorLogin").append(response);
-						setTimeout(function(){jQuery("errorLogin").hide();},3000);
+						console.log(response);
+						jQuery("#errorLogin").empty();
+						jQuery("#errorLogin").show();
+						jQuery("#errorLogin").append(response);
+						setTimeout(function(){jQuery("#errorLogin").hide();},3000);
 					}
+					
+				jQuery("#spinnerContainer").hide();
 				});
+				}
 			}
+			
+			$scope.$watch("buyer",function(newVal,oldVal){
+				if (newVal != "" && newVal != "0") {
+				var url = "https://popcart.firebaseio.com/carts/" + newVal;
+				var cartRef = new Firebase(url);
+				$scope.orderItems = $firebase(cartRef).$asArray();
+			} else {
+				$scope.orderItems=[];
+				jQuery('#checkoutBtn').hide();
+			}
+				
+			});
 			
 			$scope.moveToCheckOut = function() {
 
@@ -386,7 +415,7 @@ function getCookie(cname) {
 			return {
 				restrict: 'E',
 				scope: false,
-				templateUrl: '../templates/cart.php',
+				templateUrl: 'https://popcart.herokuapp.com//templates/cart.php',
 				link: function(scope, elem, attrs) {
 					console.log(scope.seller);
 				},
@@ -396,6 +425,12 @@ function getCookie(cname) {
 		 
 					 },
 					 post: function(scope, element, attributes, controller, transcludeFn){
+						 
+						if(getCookie('username')!=""){
+							jQuery("#username-container").empty();
+							jQuery("#username-container").append(getCookie('username'));
+							jQuery("#logoutBtn").show();
+						}
 						 var braintree = Braintree.create("MIIBCgKCAQEAtLwN7/rYvKEYbaK6RRQsCXnsJg/d3jFwsUbCkHGduIrLakwqoaKfV2QOFOp6uXWrRbCepjyzY5k3GzuHPGrlfpVVdD9KgUXA0uQegkjKZM6tn2Nll3IpJoXVvZYIvoCHUAo8RwDC6eBoGAsH26j27naH0JB0uyPLYS8cFkvZnfi+DfvS1kDCjYP6rLvoYPdfXE7RNN6VcUnGfYQ+5MFF3O56oExFU9TWt57q/rO7y+EO5MYyGn7yqSM3V+DdR2FXFqqQFzcOAgQU/fV2LY45V18+54MEW1tc/ktCm3YMGX+3PfvLuXKC7ZavVmMdyBfk/Ujy73jBi+9Pj17WNMpvoQIDAQAB");
 					
 					var ajax_submit = function(e) {
