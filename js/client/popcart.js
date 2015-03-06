@@ -57,7 +57,7 @@
 			var script_tag = document.createElement('script');
 			script_tag.setAttribute("type", "text/javascript");
 			script_tag.setAttribute("src",
-				"https://popcart.herokuapp.com/js/lib/angular.min.js");
+				"https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js");
 			// Try to find the head, otherwise default to the documentElement
 			(document.getElementsByTagName("head")[0] || document.documentElement).appendChild(script_tag);
 		}
