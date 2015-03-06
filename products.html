@@ -36,18 +36,28 @@
 
 
   <script>
+  
+    function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
     var productApp = angular.module('productsApp', ["firebase"]);
     productApp.controller('ProductCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
-		$.post( "scripts/userLoggedIn.php", function( data ) {
-			$scope.user=data;
+			$scope.user=getCookie('username');
 			
 			 var ref = new Firebase("https://popcart.firebaseio.com/products/"+$scope.user);
 			$scope.products = $firebase(ref).$asArray();
 			$scope.removeItem = function(id) {
 			  $scope.products.$remove(id);
 			};
-		});
+	
        
 
         /*$scope.addItem=function(){

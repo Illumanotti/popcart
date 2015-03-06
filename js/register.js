@@ -48,6 +48,7 @@ $(function(){
 		},
 		complete:function(response){
 			if(response.responseText=="1"){
+				document.cookie="username="+$("#registerName").val();
 				window.location.replace('home.php');
 			}else{
 				$("#errorLogin").show();
