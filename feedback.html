@@ -47,104 +47,13 @@
       </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong></strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong></strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong></strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                        <li>
-                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">View All</a>
-                        </li>
-                    </ul>
-                </li>
+               
+                
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="#" ng-click="logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -178,16 +87,7 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                            Feedback
-                            
                         </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="home.php">Home</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> Feedback
-                            </li>
-                        </ol>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -197,23 +97,52 @@
 						<div class="col-lg-12">
 						
 							  <div class="alert alert-success" >
-									Please describe any difficulties you have found when configuring your POP-cart so that we can better serve you. Your feedback is greatly appreciated to help us improve and get better at serving you! Meanwhile, please look at another awesome application by one of our peers <a href="#">here</a>
+									The Singapore Government has launched a scheme where they will pay university students and recent graduates to work for local SaaS companies for up to 1 year. In addition to this government-funded subsidy, we are authorized to pay you an incentive bonus plan based on your ability to facilitate the growth of our SaaS business.<br/>
+									
+									Also, please visit awesome applications from: <br/>
+									<ul>
+									<li><a href="">Team 18</a></li>
+									<li><a href="">Team 20</a></li> 
+									</ul>
+									
 							  </div>
 							
 						</div>
 					</div>
-					<form>
+					<form class="form-horizontal">
+					<div class="row">
+					
+					
+					
+					<div class="col-lg-12">
+					
+				 <div class="form-group">
+					
+					<div class="col-sm-4">
+					<b>Full Name</b><br/>
+					  <input type="text" class="form-control" id="fname" >
+					</div>
+				  </div>
+				  
+					<b>What we should start doing</b>
+					<textarea id="startFb" class="form-control" rows="2"></textarea><br/>
+					<b>What we should stop doing</b>
+					<textarea id="stopFb" class="form-control" rows="2"></textarea><br/>
+					<b>What we should continue doing</b>
+					<textarea id="continueFb" class="form-control" rows="2"></textarea><br/>
+					</div>
+					</div>
 					<div class="row">
 						<div class="col-lg-4">
-								Comments on Home page
+								<b>Comments on Home page</b>
 								<textarea id="homeFb" class="form-control" rows="3"></textarea>
 								</div>
 								<div class="col-lg-4">
-								Comments on Product Management
+								<b>Comments on Product Management</b>
 								<textarea id="productFb" class="form-control" rows="3"></textarea>
 								</div>
 								<div class="col-lg-4">
-								Comments on Widget Management
+								<b>Comments on Widget Management</b>
 								<textarea id="widgetFb" class="form-control" rows="3"></textarea>
 								</div>
 						</div><br/>
@@ -229,9 +158,13 @@
 					<div class="row">
 					<div class="col-lg-12">
 						<table class="table table-bordered">
-						  <tr><th>User</th><th>Home Page</th><th>Product Management</th><th>Widget Management</th></tr>
+						  <tr><th>User</th><th>Full Name</th><th>Start</th><th>Stop</th><th>Continue</th><th>Home Page</th><th>Product Management</th><th>Widget Management</th></tr>
 						  <tr ng-repeat="fb in feedbackList" >
 						  <td>{{fb.user}}</td>
+						  <td>{{fb.fname}}</td>
+						  <td>{{fb.startFb}}</td>
+						  <td>{{fb.stopFb}}</td>
+						  <td>{{fb.continueFb}}</td>
 						  <td>{{fb.homeFb}}</td>
 						  <td>{{fb.productFb}}</td>
 						  <td>{{fb.widgetFb}}</td>
@@ -265,6 +198,10 @@
     }
     return "";
 }
+
+function deleteCookie(){
+	document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+}
 	var fbApp=angular.module('feedbackApp',['firebase']);
 	fbApp.controller('feedbackCtrl',['$scope','$firebase',function($scope,$firebase){
 		var ref=new Firebase("https://popcart.firebaseio.com/feedback");
@@ -274,9 +211,14 @@
 			var user=getCookie('username');
 			//get feedback values
 			//construct json object
-			var item={user:user,homeFb:$("#homeFb").val(),productFb:$("#productFb").val(),widgetFb:$("#widgetFb").val()};
+			var item={user:user,fname:$("#fname").val(),startFb:$("#startFb").val(),stopFb:$("#stopFb").val(),continueFb:$("#continueFb").val(),homeFb:$("#homeFb").val(),productFb:$("#productFb").val(),widgetFb:$("#widgetFb").val()};
 			$scope.feedbackList.$add(item);
-			
+			alert("Thanks for your feedback");
+		}
+		
+		$scope.logout=function(){
+			deleteCookie();
+			window.location.replace("index.php");
 		}
 		
 	}])

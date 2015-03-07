@@ -176,7 +176,7 @@
             </div>
 			
 			<div class="form-group">
-              <label for="alias" class="col-sm-2 control-label">Alias</label>
+              <label for="alias" class="col-sm-2 control-label">Full Name</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="alias" placeholder="eg. John" name="alias" required>
               </div>
