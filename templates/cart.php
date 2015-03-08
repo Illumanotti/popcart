@@ -32,11 +32,11 @@ if(isset($_SESSION[$cookie_name])) {
             <div id="productSlider" class="carousel-inner" role="listbox">
                 <div id={{id}} ng-repeat="(id,product) in products" ng-if="id==0" class="item active">
                     <img src="{{product.image}}" ng-style="{'width': ((widgetOptions.widgetWidth*0.75)+'px'),'height':((widgetOptions.widgetHeight*0.75)+'px')}">
-                        <div class="carousel-caption">{{product.name}}</div>
+                        <div class="carousel-caption">{{product.productName}}<div> Price:${{product.price}}<br/>{{product.desc}}</div>
                     </div>
                     <div id={{id}} ng-repeat="(id,product) in products" ng-if="id!=0" class="item">
                         <img class="responsive" src="{{product.image}}" ng-style="{'width': ((widgetOptions.widgetWidth*0.75)+'px'),'height':((widgetOptions.widgetHeight*0.75)+'px')}">
-                            <div class="carousel-caption">{{product.name}}</div>
+                            <div class="carousel-caption widget-caption">{{product.productName}}<br/> Price:${{product.price}}<br/>{{product.desc}}</div>
                         </div>
                     </div>
                     <a class="left carousel-control" href="#productCarousel" role="button" data-slide="prev" ng-click="slideLeft()">
