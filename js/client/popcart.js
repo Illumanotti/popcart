@@ -303,7 +303,9 @@ function deleteCookie(){
 					}
 					return total.toFixed(2);
 				};
-			
+			$scope.showItem=function(id){
+				$scope.selectItem=$scope.products[id];
+			};
 			
 			$scope.loginUser=function(){
 				

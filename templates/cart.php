@@ -31,11 +31,11 @@ if(isset($_SESSION[$cookie_name])) {
         <div id="productCarousel" class="carousel slide" data-ride="carousel">
             <div id="productSlider" class="carousel-inner" role="listbox">
                 <div id={{id}} ng-repeat="(id,product) in products" ng-if="id==0" class="item active">
-                    <img src="{{product.image}}" ng-style="{'width': ((widgetOptions.widgetWidth*0.75)+'px'),'height':((widgetOptions.widgetHeight*0.75)+'px')}">
+                    <img ng-click="showItem(id)" src="{{product.image}}" ng-style="{'width': ((widgetOptions.widgetWidth*0.75)+'px'),'height':((widgetOptions.widgetHeight*0.75)+'px')}">
                         <div class="carousel-caption"><h3>{{product.productName}}</h3><br/><div> Price:${{product.price}}<br/>{{product.desc}}</div>
                     </div>
                     <div id={{id}} ng-repeat="(id,product) in products" ng-if="id!=0" class="item">
-                        <img class="responsive" src="{{product.image}}" ng-style="{'width': ((widgetOptions.widgetWidth*0.75)+'px'),'height':((widgetOptions.widgetHeight*0.75)+'px')}">
+                        <img ng-click="showItem(id)" class="responsive" src="{{product.image}}" ng-style="{'width': ((widgetOptions.widgetWidth*0.75)+'px'),'height':((widgetOptions.widgetHeight*0.75)+'px')}">
                             <div class="carousel-caption"><h3>{{product.productName}}</h3><br/> Price:${{product.price}}<br/>{{product.desc}}</div>
                         </div>
                     </div>

@@ -22,3 +22,31 @@ background-image: linear-gradient(to bottom, #FFFFFF 0%, #E3E3E3 300%);
 	display:none;
 	border-color:#E3E3E3;
 }
+
+.widget-caption{
+	top:0;
+}
+
+.widget-caption-desc{
+	vertical-align:bottom;
+}
+
+.carousel-caption{
+/* IE10 Consumer Preview */ 
+background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #E3E3E3 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #E3E3E3 100%);
+
+/* Opera */ 
+background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #E3E3E3 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #FFFFFF), color-stop(1, #E3E3E3));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #E3E3E3 100%);
+
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to top, #FFFFFF 0%, #E3E3E3 100%);
+}

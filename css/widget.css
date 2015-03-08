@@ -60,6 +60,10 @@ code {
 
 }
 
+.widget-caption{
+	top:0;
+}
+
 .cart-item-image{
 	height:50px;
 }
