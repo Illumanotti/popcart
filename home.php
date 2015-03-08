@@ -73,21 +73,23 @@
             </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                  <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="home.php"><i class="fa fa-fw fa-dashboard"></i> Home</a>
-                    </li>
-					
-					 <li>
-                        <a  href="products.html"><i class="fa fa-fw fa-shopping-cart"></i> Products</a>
-                    </li>
-					<li>
-                        <a href="widget.html"><i class="fa fa-fw fa-gears"></i>Widget Management</a>
-                    </li>
-							  <li>
-            <a href="feedback.html"><i class="fa fa-fw fa-gears"></i>Feedback</a>
+                   <ul class="nav navbar-nav side-nav">
+          <li>
+            <a href="home.php"><i class="fa fa-fw fa-dashboard"></i> Home</a>
           </li>
-                </ul>
+          <li>
+            <a href="products.html"><i class="fa fa-fw fa-shopping-cart"></i> Products</a>
+          </li>
+          <li>
+            <a href="widget.html"><i class="fa fa-fw fa-gears"></i>Widget Management</a>
+          </li>
+		  	<li>
+            <a href="feedback.html"><i class="fa fa-fw fa-thumbs-up"></i>Feedback</a>
+          </li>
+		  <li>
+            <a href="pricing.html"><i class="fa fa-fw fa-money"></i>Pricing</a>
+          </li>
+        </ul>
             </div>
             <!-- /.navbar-collapse -->
         </nav>
