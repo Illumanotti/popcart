@@ -52,6 +52,44 @@ function deleteCookie(){
 	document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 }
 
+function validate(){
+	var stock=$("#stock").val();
+	var price=$("#price").val();
+	
+	var verdict=true;
+	var errors="";
+	if(!isNaN(stock)){
+		if(stock<=0){
+			errors=errors+"Product stock must be more than 0<br/>";
+			verdict=false;
+		}
+	}else{
+		errors=errors+"Please enter a number for product stock<br/>";
+		verdict=false;
+	}
+	
+	var numNum=+price;
+	if(!isNaN(numNum)){
+		if(price<=0){
+			errors=errors+"Product price must be more than 0<br/>";
+			verdict=false;
+		}
+	}else{
+		errors=errors+"Please enter a number for product price<br/>";
+		verdict=false;
+	}
+	if(!verdict){
+		displayProductError(errors);
+	}
+	return verdict;
+}
+
+function displayProductError(errorMsg){
+	$("#errorAlert").empty();
+	$("#errorAlert").append(errorMsg);
+	$("#errorAlert").show().delay(4000).fadeOut();
+}
+
 
     var productApp = angular.module('productsApp', ["firebase"]);
     productApp.controller('ProductCtrl', ['$scope', '$firebase',
@@ -269,7 +307,8 @@ function deleteCookie(){
                 <span class="sr-only">0% Complete</span>
               </div>
             </div>
-
+			<div id="errorAlert" class="alert alert-danger alert-dismissible" role="alert">
+            </div>
             <div id="successAlert" class="alert alert-success alert-dismissible" role="alert">
               <strong>Well done!</strong> Your product has been added.
             </div>

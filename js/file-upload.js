@@ -1,8 +1,12 @@
 $(function(){
 	$('#myForm').ajaxForm({
 		beforeSend:function(){
-			$(".progress").show();
-			
+			var verdict= validate();
+			if(!verdict){
+				return false;
+			}else{
+				$(".progress").show();
+			}
 		},
 		uploadProgress:function(event,position,total,percentComplete){
 			$(".progress-bar").width(percentComplete+'%');
@@ -12,14 +16,19 @@ $(function(){
 			$(".progress").hide();
 		},
 		complete:function(response){
-			$(".progress").hide();
-			$("#name").val("");
-			$("#price").val("");
-			$("#desc").val("");
-			$("#stock").val("");
-			$("#successAlert").show().delay(1000).fadeOut();
+			if(response.responseText=="success"){
+				$(".progress").hide();
+				$("#name").val("");
+				$("#price").val("");
+				$("#desc").val("");
+				$("#stock").val("");
+				$("#successAlert").show().delay(1000).fadeOut();
+			}else{
+				displayProductError(response.responseText);
+			}
 		}
 	});
 	$("#successAlert").hide();
+	$("#errorAlert").hide();
 	$(".progress").hide();
 });

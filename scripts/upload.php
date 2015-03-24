@@ -4,12 +4,20 @@ require 'objects/Product.php';
 
 $path='/products';
 $firebase = new Firebase('https://popcart.firebaseio.com', 'u6V7Q6zAxWp6vdhQSmq4pNX4MSUL7mtPwfqtYFgR');
-
+if(!isset($_FILES["fileToUpload"])){
+	echo "PLease select a image";
+	return;
+}
 $username=$_POST['username'];
 $productName= $_POST['productName'];
 $price=$_POST['productPrice'];
 $desc=$_POST['productDesc'];
 $stock=$_POST['productStock'];
+
+if(!is_numeric($price)){
+	echo "Please enter a number for the price";
+	return;
+}
 // an array of allowed extensions
 $allowedExts = array("gif", "jpeg", "jpg", "png","GIF","JPEG","JPG","PNG");
 $temp = explode(".", $_FILES["fileToUpload"]["name"]);
@@ -25,7 +33,7 @@ if ((($_FILES["fileToUpload"]["type"] == "image/gif")
 || ($_FILES["fileToUpload"]["type"] == "image/png"))
 && in_array($extension, $allowedExts)) {
   if ($_FILES["fileToUpload"]["error"] > 0) {
-    echo "0";
+    echo "Please input a image";
   } else {
     $target = "../uploads/".$username."/";
 	$imageURL="https://popcart.herokuapp.com/uploads/".$username."/";
@@ -42,10 +50,10 @@ if ((($_FILES["fileToUpload"]["type"] == "image/gif")
 	$firebase->set(($path."/".$username),$productsArray);
 	
 	
-    echo  "upload/" . $_FILES["fileToUpload"]["name"];
+    echo "success";
   }
 } else {
-  echo "0";
+  echo "Invalid file format";
 }
 
 
