@@ -410,7 +410,16 @@ function deleteCookie(){
 				}
 			
 			};
-
+			
+			$scope.addQuantity=function(id){
+				$scope.orderItems[id].quantity=parseInt($scope.orderItems[id].quantity)+1;
+				$scope.orderItems.$save(id);
+			}
+			
+			$scope.minusQuantity=function(id){
+				$scope.orderItems[id].quantity=parseInt($scope.orderItems[id].quantity)-1;
+				$scope.orderItems.$save(id);
+			}
 			$scope.slideRight = function() {
 				jQuery("#productSlider #" + productID).hide();
 				jQuery("#productSlider #" + productID).removeClass("active");

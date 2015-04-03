@@ -32,10 +32,10 @@ if(isset($_SESSION[$cookie_name])) {
             <div id="productSlider" class="carousel-inner" role="listbox">
                 <div id={{id}} ng-repeat="(id,product) in products" ng-if="id==0" class="item active">
                     <img ng-click="showItem(id)" src="{{product.image}}" ng-style="{'width': ((widgetOptions.widgetWidth*0.75)+'px'),'height':((widgetOptions.widgetHeight*0.75)+'px')}">
-                       
+                       </div>
                     <div id={{id}} ng-repeat="(id,product) in products" ng-if="id!=0" class="item">
                         <img ng-click="showItem(id)" class="responsive" src="{{product.image}}" ng-style="{'width': ((widgetOptions.widgetWidth*0.75)+'px'),'height':((widgetOptions.widgetHeight*0.75)+'px')}">
-                            <div class="carousel-caption"><h3>{{product.productName}}</h3><br/> Price:${{product.price}}<br/>{{product.desc}}</div>
+                          
                         </div>
                     </div>
                     <a class="left carousel-control" href="#productCarousel" role="button" data-slide="prev" ng-click="slideLeft()">
@@ -47,8 +47,8 @@ if(isset($_SESSION[$cookie_name])) {
                         <span class="sr-only">Next</span>
                     </a>
                     <div class="add-cart-btn-container">
-                        <button ng-click="viewProduct()" class="btn btn-md btn-primary add-cart-btn">Product Details</button>
-                        <button class="btn btn-md btn-primary add-cart-btn" ng-click="viewCart()">View Cart</button>
+                        <button ng-click="viewProduct()" class="btn btn-success add-cart-btn"><span class="glyphicon glyphicon-plus"></span> Add Product</button>
+                        <button class="btn btn-primary add-cart-btn" ng-click="viewCart()"><span class="glyphicon glyphicon-shopping-cart"></span>  View Cart</button>
                     </div>
                 </div>
             </div>
@@ -141,7 +141,15 @@ if(isset($_SESSION[$cookie_name])) {
                                 <img class="cart-item-image" src="{{item.product.image}}">
                                 </td>
                                 <td >{{item.product.productName}}</td>
-                                <td>{{item.quantity}}</td>
+                                
+								<td>
+								<div class="btn-group">
+								<button ng-click="addQuantity(id)"class="btn btn-default"> + </button>
+								<button style="width:80px" class="btn btn-default" disabled>{{item.quantity}}</button>
+								<button ng-click="minusQuantity(id)" class="btn btn-default"> - </button>
+								</div>
+								</td>
+								
                                 <td>${{item.product.price}}</td>
                                 <td>
                                     <button type="button" ng-click="removeItem(id)" class="btn btn-danger">Remove</button>
