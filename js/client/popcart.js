@@ -298,7 +298,7 @@ function deleteCookie(){
 
 							var item = $scope.orderItems[i];
 
-							total += parseFloat(item.product.price);
+							total += item.quantity*parseFloat(item.product.price);
 						}
 					}
 					return total.toFixed(2);
@@ -339,11 +339,11 @@ function deleteCookie(){
 				});
 				}
 			}
-			
+			var cartRef="";
 			$scope.$watch("buyer",function(newVal,oldVal){
 				if (newVal != "" && newVal != "0") {
 				var url = "https://popcart.firebaseio.com/carts/" + newVal;
-				var cartRef = new Firebase(url);
+				 cartRef= new Firebase(url);
 				$scope.orderItems = $firebase(cartRef).$asArray();
 			} else {
 				$scope.orderItems=[];
@@ -383,19 +383,30 @@ function deleteCookie(){
 			$scope.closeProductDetails=function(){
 				jQuery("#productDetails").hide();
 			}
-
 			$scope.addToCart = function() {
 				if($scope.buyer==""){
 					jQuery('#viewCart').show();
 				}else{
-						jQuery.post("https://popcart.herokuapp.com/scripts/addToCart.php", {
-						buyer: $scope.buyer,
-						seller: seller,
-						productID: productID,
-						quantity:$scope.quantity
-					}).done(function(data) {
-						console.log(data);
-					});
+						$scope.closeProductDetails();
+						var existsInCart=false;
+						for(var i=0;i<$scope.orderItems.length;i++ ){
+							if($scope.orderItems[i].product.productID==productID){
+								existsInCart=true;
+								$scope.orderItems[i].quantity=parseInt($scope.orderItems[i].quantity)+$scope.quantity;
+								$scope.orderItems.$save(i);
+							}
+						}
+						
+						if(!existsInCart){
+							jQuery.post("https://popcart.herokuapp.com/scripts/addToCart.php", {
+							buyer: $scope.buyer,
+							seller: seller,
+							productID: productID,
+							quantity:$scope.quantity
+							}).done(function(data) {
+								$scope.quantity=1;
+							});
+						}
 				}
 			
 			};

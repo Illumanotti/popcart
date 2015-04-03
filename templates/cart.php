@@ -68,10 +68,11 @@ if(isset($_SESSION[$cookie_name])) {
 				
 				<div class="col-md-offset-3 col-md-5">
 				<table class="table table-bordered">
+					<tr><td>Description</td><td>{{viewSelectedProduct().desc}}</td></tr>
 					<tr><td>Price</td><td>${{viewSelectedProduct().price}}</td></tr>
 					<tr><td>Quantity</td><td><input type="number" class="form-control" value="1" ng-model="quantity"type="text" required/></td></tr>
 				</table>
-				<button class="btn btn-primary" ng-click="addToCart()">Add to Cart</button> &nbsp;&nbsp;<button ng-click="closeProductDetails()" class="btn btn-danger">Close</button>
+				<button class="btn btn-primary" ng-click="addToCart()">Add to Cart</button> &nbsp;&nbsp;<button ng-click="closeProductDetails()" class="btn btn-default">Close</button>
 				</div>
 				</div>
 
