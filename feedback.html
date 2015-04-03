@@ -227,6 +227,11 @@ function deleteCookie(){
 		var ref=new Firebase("https://popcart.firebaseio.com/feedback");
 		$scope.feedbackList=$firebase(ref).$asArray();
 		
+		
+	if(getCookie("username")==""){
+			window.location.replace("index.php");
+		}
+		
 		$scope.addFeedback=function(){
 			var user=getCookie('username');
 			//get feedback values

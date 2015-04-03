@@ -371,16 +371,33 @@ function deleteCookie(){
 			$scope.viewCart = function() {
 				jQuery('#viewCart').show();
 			};
+			
+			$scope.viewProduct=function(){
+				jQuery("#productDetails").show();
+			}
+			
+			$scope.viewSelectedProduct=function(){
+				return $scope.products[productID];
+			}
+			
+			$scope.closeProductDetails=function(){
+				jQuery("#productDetails").hide();
+			}
 
-			$scope.addToCart = function(username) {
-				//change to appropriate user and need change url as well
-				jQuery.post("https://popcart.herokuapp.com/scripts/addToCart.php", {
-					buyer: $scope.buyer,
-					seller: seller,
-					productID: productID
-				}).done(function(data) {
-					console.log(data);
-				});
+			$scope.addToCart = function() {
+				if($scope.buyer==""){
+					jQuery('#viewCart').show();
+				}else{
+						jQuery.post("https://popcart.herokuapp.com/scripts/addToCart.php", {
+						buyer: $scope.buyer,
+						seller: seller,
+						productID: productID,
+						quantity:$scope.quantity
+					}).done(function(data) {
+						console.log(data);
+					});
+				}
+			
 			};
 
 			$scope.slideRight = function() {

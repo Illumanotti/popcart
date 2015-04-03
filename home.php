@@ -40,6 +40,32 @@
   ga('send', 'pageview');
 </script>
 
+<script>
+  
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+function deleteCookie(){
+	document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+}
+
+if(getCookie("username")==""){
+	window.location.replace("index.php");
+}
+
+function logout(){
+			deleteCookie();
+			window.location.replace("index.php");
+};
+</script>
 
 </head>
 
@@ -66,7 +92,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="index.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a onclick="logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>

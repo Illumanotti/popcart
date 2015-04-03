@@ -94,6 +94,10 @@ function displayProductError(errorMsg){
     var productApp = angular.module('productsApp', ["firebase"]);
     productApp.controller('ProductCtrl', ['$scope', '$firebase',
       function($scope, $firebase) {
+		if(getCookie("username")==""){
+			window.location.replace("index.php");
+		}
+
 			$scope.user=getCookie('username');
 			
 			 var ref = new Firebase("https://popcart.firebaseio.com/products/"+$scope.user);
@@ -209,7 +213,7 @@ function displayProductError(errorMsg){
           </div>
         </div>
         <!-- /.row -->
-
+		<div class="alert alert-info alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="glyphicon glyphicon-info-sign"></span>  Start adding products into your shopping cart by clicking on <strong>"Add New Product"</strong></div>
         <div class="row" ng-controller="ProductCtrl">
 		<div class="col-lg-12">
           <br/>

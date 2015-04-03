@@ -23,7 +23,6 @@
 		
 		widgetRef.on('value',function(snapshot){
 			console.log(snapshot.val().showHeader);
-			
 		})
 		
 		//get Products
@@ -35,7 +34,10 @@
 				$('#viewCart', window.parent.document).show();
 		};
 		
-
+		ref.on('value',function(snapshot){
+			$scope.productEmpty= $scope.products.length <= 0;
+		})
+		
 		$scope.addToCart=function(username){
 			var productID=$("#productSlider").find('.active').index();
 			//change to appropriate user and need change url as well
@@ -93,9 +95,9 @@
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                   </a>
-				  <div class="add-cart-btn-container"><button ng-click="addToCart()" class="btn btn-lg btn-primary add-cart-btn">Add to Cart</button>
+				  <div class="add-cart-btn-container"><button class="btn btn-lg btn-primary add-cart-btn">Add to Cart</button>
 				  
-				  <button class="btn btn-lg btn-primary add-cart-btn" ng-click="viewCart()">View Cart</button>
+				  <button class="btn btn-lg btn-primary add-cart-btn">View Cart</button>
 				  </div>
                 </div>
               </div>

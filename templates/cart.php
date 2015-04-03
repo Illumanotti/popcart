@@ -32,8 +32,7 @@ if(isset($_SESSION[$cookie_name])) {
             <div id="productSlider" class="carousel-inner" role="listbox">
                 <div id={{id}} ng-repeat="(id,product) in products" ng-if="id==0" class="item active">
                     <img ng-click="showItem(id)" src="{{product.image}}" ng-style="{'width': ((widgetOptions.widgetWidth*0.75)+'px'),'height':((widgetOptions.widgetHeight*0.75)+'px')}">
-                        <div class="carousel-caption"><h3>{{product.productName}}</h3><br/><div> Price:${{product.price}}<br/>{{product.desc}}</div>
-                    </div>
+                       
                     <div id={{id}} ng-repeat="(id,product) in products" ng-if="id!=0" class="item">
                         <img ng-click="showItem(id)" class="responsive" src="{{product.image}}" ng-style="{'width': ((widgetOptions.widgetWidth*0.75)+'px'),'height':((widgetOptions.widgetHeight*0.75)+'px')}">
                             <div class="carousel-caption"><h3>{{product.productName}}</h3><br/> Price:${{product.price}}<br/>{{product.desc}}</div>
@@ -48,12 +47,38 @@ if(isset($_SESSION[$cookie_name])) {
                         <span class="sr-only">Next</span>
                     </a>
                     <div class="add-cart-btn-container">
-                        <button ng-click="addToCart()" class="btn btn-md btn-primary add-cart-btn">Add to Cart</button>
+                        <button ng-click="viewProduct()" class="btn btn-md btn-primary add-cart-btn">Product Details</button>
                         <button class="btn btn-md btn-primary add-cart-btn" ng-click="viewCart()">View Cart</button>
                     </div>
                 </div>
             </div>
         </div>
+		
+		
+<div id="productDetails" class="view-cart-overlay">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button ng-click="closeProductDetails()" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<center><h4 class="modal-title">{{viewSelectedProduct().productName}}</h4></center>
+			</div>
+			<div class="modal-body" style="text-align:center">
+				<img src="{{viewSelectedProduct().image}}"/><br/>
+				<div class="row">
+				
+				<div class="col-md-offset-3 col-md-5">
+				<table class="table table-bordered">
+					<tr><td>Price</td><td>${{viewSelectedProduct().price}}</td></tr>
+					<tr><td>Quantity</td><td><input type="number" class="form-control" value="1" ng-model="quantity"type="text" required/></td></tr>
+				</table>
+				<button class="btn btn-primary" ng-click="addToCart()">Add to Cart</button> &nbsp;&nbsp;<button ng-click="closeProductDetails()" class="btn btn-danger">Close</button>
+				</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
 		
 		<!--MODAL START-->
 <div id="viewCart" class="view-cart-overlay">

@@ -13,6 +13,7 @@ $firebase = new Firebase('https://popcart.firebaseio.com', 'u6V7Q6zAxWp6vdhQSmq4
 $buyer=$_POST['buyer'];
 $seller=$_POST['seller'];
 $productID=$_POST['productID'];
+$quantity=$_POST['quantity'];
 
 $orderCart=json_decode($firebase->get($path."/".$buyer),true);
 
@@ -22,7 +23,7 @@ if($orderCart===null){
 	$orderCart=[];
 }
 
-$orderItem=new OrderItem($buyer,$seller,$product,1);
+$orderItem=new OrderItem($buyer,$seller,$product,$quantity);
 
 $orderCart[]=$orderItem;
 
