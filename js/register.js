@@ -58,11 +58,11 @@ $(function(){
 				setCookie('username',$("#username").val(),1);
 				window.location.replace('home.php');
 			}else{
-				$("#errorLogin").show();
+				$("#errorLogin").slideToggle();
 				$("#errorLogin").empty();
 				$("#errorLogin").append(response.responseText);
 				setTimeout(function(){ 
-					$("#errorLogin").hide();
+					$("#errorLogin").slideToggle();
 				}, 4000);
 			}
 		}

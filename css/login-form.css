@@ -4,8 +4,38 @@
 
 .login-form-container{
 /*background-image:url("../img/bg.png");*/
+border:solid 2px;
+border-color:#E3E3E3;
+font-family: 'Lato', sans-serif;
+background-color: rgba(255, 255, 255, 0.7);
+}
+
+.facebook-container{
+	margin-top:15px;
+}
+
+#loginForm{
+	margin-top:15px;
+}
+
+.login-form-textbox{
+	font-size:20px;
+}
+
+.login-form-textbox:hover{
+	border: solid 2px;
+	border-color:#1FBED6;
 }
 
 .spinner-logo{
 	display:none;
+	padding-top:10px;
+}
+
+.login-body{
+overflow:hidden;
+background-image:url("../img/bg.png");
+background-position: center;
+background-repeat: no-repeat;
+background-color: #FFF;
 }

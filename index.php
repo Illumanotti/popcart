@@ -16,10 +16,11 @@
  <script src="js/lib/ngFacebook.js"></script>
  
   <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-social.css" rel="stylesheet">
   <link href="css/sb-admin.css" rel="stylesheet">
   <link href="css/login-form.css" rel="stylesheet">
   <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+<link href='http://fonts.googleapis.com/css?family=Lato:300italic' rel='stylesheet' type='text/css'>
   <title>POP-Cart Login</title>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -97,11 +98,11 @@
 
 </head>
 
-<body ng-controller="LoginCtrl">
+<body ng-controller="LoginCtrl" class="login-body">
 
   <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
+		<div class="col-lg-offset-4 col-lg-4">
+		<center>
       <div class="panel panel-default login-form-container">
         <div class="panel-body">
           <div class="row logo-container">
@@ -110,36 +111,40 @@
           <div>
             <form class="form-horizontal" action="scripts/loginUser.php" enctype="multipart/form-data" method="post" id="loginForm" data-toggle="validator">
               <div class="form-group">
-                <label for="username" class="col-sm-2 control-label">Username</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" name="loginUser" id="username" placeholder="Username" required>
+               
+                <div class="col-sm-offset-2 col-sm-8">
+                  <input type="text" class="form-control login-form-textbox" style="text-align:center;" name="loginUser" id="username" placeholder="U S E R N A M E" required>
                 </div>
               </div>
               <div class="form-group">
-                <label for="loginPassword" class="col-sm-2 control-label">Password</label>
-                <div class="col-sm-10">
-                  <input type="password" class="form-control" name="loginPw" id="loginPassword" placeholder="Password" required>
+
+                <div class="col-sm-offset-2 col-sm-8">
+                  <input type="password" style="text-align:center;" class="form-control login-form-textbox" name="loginPw" id="loginPassword" placeholder="P A S S W O R D" required>
                 </div>
               </div>
-			  
-			<div id="errorLogin" class="alert alert-danger" style="display:none"role="alert"></div>
+			
               <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-5">
-                 <span> <button type="submit" class="btn btn-primary">Login</button>
-				 <img class="spinner-logo" src="img/loading.gif"/>
-				 </span>
+                <div class="col-sm-offset-2 col-sm-2">
+                 <button type="submit" class="btn btn-primary">Login</button>
                 </div>
-				 <div class="col-sm-5">
+				 <div class="col-sm-1">
+				  <img class="spinner-logo" src="img/loading-circle.gif"/>
+				  </div>
+				 <div class="col-sm-offset-2 col-sm-3">
 				  <a href="#" class="btn btn-success" data-toggle="modal" data-target="#registerModal">Register</a>
 				  </div>
+				  
+				 <div class="col-sm-offset-2 col-sm-8 facebook-container"><a href="" class="btn btn-block btn-social btn-facebook"ng-click="loginWithFB()"><i class="fa fa-facebook"></i>Login with Facebook</a></div>
               </div>
-			  <div class="col-sm-offset-2"><a href="" ng-click="loginWithFB()">Login with Facebook</a></div>
+			  <br/>
+			  <div id="errorLogin" class="alert alert-danger col-sm-offset-3 col-sm-6" style="display:none"role="alert"></div>
             </form>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4"></div>
+	  </center>
+	  </div>
+    
   </div>
 
 
